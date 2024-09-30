@@ -2,7 +2,7 @@
 <nav class="iq-sidebar-menu">
     <ul id="iq-sidebar-toggle" class="iq-menu">
         <li class="active">
-            <a href="dashboard/index.html" class=" ">
+            <a href="./" class=" ">
                 <i class="las la-newspaper"></i><span>Accueil</span>
             </a>
         </li>

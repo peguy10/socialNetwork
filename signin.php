@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>SocialV | Responsive Bootstrap 4 Admin Dashboard Template</title>
+      <title>Content Center</title>
       
       <link rel="shortcut icon" href="assets/images/favicon.ico" />
       <link rel="stylesheet" href="assets/css/libs.min.css">

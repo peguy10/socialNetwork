@@ -106,32 +106,32 @@
                      </div>
                      <div class="card-body">
                            <form action="scripts/addcontent.php" method="POST" enctype="multipart/form-data">
-                                 <div class="form-group">
-                                    <label for="type_contenu">Type de Contenu</label>
-                                    <select class="form-control" id="type_contenu" name="type_contenu" required>
-                                       <option value="">Sélectionnez un type</option>
-                                       <option value="texte">Texte</option>
-                                       <option value="image">Image</option>
-                                       <option value="video">Vidéo</option>
-                                    </select>
-                                 </div>
-                                 <div class="form-group" id="contenu_texte">
-                                    <label for="description">Description</label>
-                                    <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
-                                 </div>
-                                 <div class="form-group" id="contenu_image" style="display: none;">
-                                    <label for="image">Télécharger une Image</label>
-                                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                                 </div>
-                                 <div class="form-group" id="contenu_video" style="display: none;">
-                                    <label for="video">URL de la Vidéo</label>
-                                    <input type="url" class="form-control" id="video" name="video" placeholder="https://example.com/ma_video">
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="tags">Tags (séparés par des virgules)</label>
-                                    <input type="text" class="form-control" id="tags" name="tags" placeholder="ex: technologie, santé, éducation">
-                                 </div>
-                                 <button type="submit" class="btn btn-primary">Publier</button>
+                              <div class="form-group">
+                                 <label for="type_contenu">Type de Contenu</label>
+                                 <select class="form-control" id="type_contenu" name="type_contenu" required>
+                                    <option value="">Sélectionnez un type</option>
+                                    <option value="image">Image</option>
+                                    <option value="video">Vidéo</option>
+                                 </select>
+                              </div>
+                              <div class="form-group">
+                                 <label for="description">Description</label>
+                                 <textarea class="form-control" id="description" name="description" rows="5"></textarea>
+                              </div>
+                              <div class="form-group" id="contenu_image" style="display: none;">
+                                 <label for="image">Télécharger une Image</label>
+                                 <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                              </div>
+                              <div class="form-group" id="contenu_video" style="display: none;">
+                                 <label for="video">URL de la Vidéo</label>
+                                 <input type="url" class="form-control" id="video" name="video" placeholder="https://example.com/ma_video">
+                              </div>
+                              <div class="form-group">
+                                 <label for="tags">Tags (séparés par des virgules)</label>
+                                 <input type="text" class="form-control" id="tags" name="tags" placeholder="ex: technologie, santé, éducation">
+                              </div>
+
+                              <button type="submit" class="btn btn-primary">Publier</button>
                            </form>
 
                      </div>
@@ -162,7 +162,6 @@
     <script>
         document.getElementById('type_contenu').addEventListener('change', function() {
             var type = this.value;
-            document.getElementById('contenu_texte').style.display = (type === 'texte') ? 'block' : 'none';
             document.getElementById('contenu_image').style.display = (type === 'image') ? 'block' : 'none';
             document.getElementById('contenu_video').style.display = (type === 'video') ? 'block' : 'none';
         });
