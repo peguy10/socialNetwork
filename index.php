@@ -11,7 +11,7 @@
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Content Center</title>      
-      <link rel="shortcut icon" href="assets/images/favicon.ico" />
+      <link rel="shortcut icon" href="assets/images/logo1.png" />
       <link rel="stylesheet" href="assets/css/libs.min.css">
       <link rel="stylesheet" href="assets/css/socialv.css?v=4.0.0">
       <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
@@ -19,7 +19,9 @@
       <link rel="stylesheet" href="assets/vendor/vanillajs-datepicker/dist/css/datepicker.min.css">
       <link rel="stylesheet" href="assets/vendor/font-awesome-line-awesome/css/all.min.css">
       <link rel="stylesheet" href="assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
-      
+      <style>
+         
+      </style>
   </head>
   <body class="  ">
     <!-- loader Start -->
@@ -38,8 +40,8 @@
          <div class="iq-navbar-custom">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                   <div class="iq-navbar-logo d-flex justify-content-between">
-                     <a href="dashboard/index.html">
-                        <img src="assets/images/logo.png" class="img-fluid" alt="">
+                     <a href="./">
+                        <img src="assets/images/logo1.png" class="img-fluid h-20" alt="" width="100px">
                         <span>Creator network</span>
                      </a>
                      <div class="iq-menu-bt align-self-center">

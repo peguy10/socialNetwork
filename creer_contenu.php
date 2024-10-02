@@ -20,7 +20,10 @@
   </head>
   <body class="  ">
     <!-- loader Start -->
-    
+    <div id="loading">
+          <div id="loading-center">
+          </div>
+    </div>
     <!-- loader END -->
     <!-- Wrapper Start -->
     <div class="wrapper">
@@ -64,7 +67,7 @@
                               </a>
                           </li>
                           <!-- friend icon -->
-                           <?php include('inc/friend.php');?>
+                           
                           
                            <!-- notif icon -->
                            <?php include('inc/notif.php');?>
@@ -82,7 +85,7 @@
 
 
       <!-- My friend -->
-      <?php include('inc/Myfriend.php');?>
+       
     <div id="content-page" class="content-page">
       <div class="container">
             <div class="row">

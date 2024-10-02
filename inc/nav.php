@@ -21,10 +21,10 @@
                 <i class="las la-users"></i><span>Amis</span>
             </a>
         </li>
-        <!-- <li class=" ">
-            <a href="sms.php" class=" ">
-                <i class="ri-chat-3-line"></i><span>sms</span>
+        <li class=" ">
+            <a href="admin/" class=" ">
+                <i class="ri-dashboard-3-fill"></i><span>Dashboard</span>
             </a>
-        </li> -->
+        </li>
     </ul>
 </nav>
