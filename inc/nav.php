@@ -1,6 +1,4 @@
-<?php
-    include('friendfunction.php');
-?>
+
 <nav class="iq-sidebar-menu">
     <ul id="iq-sidebar-toggle" class="iq-menu">
         <li class="active">

@@ -1,4 +1,6 @@
-
+<?php
+     include('friendfunction.php');
+?>
 <li class="nav-item dropdown">
     <a href="#" class="dropdown-toggle" id="group-drop" data-bs-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false"><i class="ri-group-line"></i></a>
@@ -18,7 +20,7 @@
                             <div
                                 class="iq-sub-card iq-sub-card-big d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
-                                        <img class="avatar-40 rounded" src="assets/images/user/01.jpg"
+                                        <img class="avatar-40 rounded" src="<?php echo $demande['photo'];?>"
                                             alt="">
                                     <div class="ms-3">
                                         <h6 class="mb-0 "><?php echo $demande['nom_demandeur'];?></h6>

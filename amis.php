@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'inc/db_connect.php';  // Assurez-vous de remplacer par votre fichier de connexion à la base de données
+include('inc/friendfunction.php');
 
 // Fonction pour récupérer tous les utilisateurs sauf celui connecté
 function recupererUtilisateurs($pdo, $id_utilisateur) {
@@ -116,8 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['destinataire'])) {
         <div class="container">
             <div class="d-grid gap-3 d-grid-template-1fr-19">
             <form method="POST" action=""> 
-                <input type="hidden" name="destinataire" value="<?php echo $utilisateur['id_user']; ?>">
              <?php foreach ($utilisateurs as $utilisateur): ?>
+                <input type="hidden" name="destinataire" value="<?php echo $utilisateur['id_user']; ?>">
                 <div class="card mb-0">
                     <div class="top-bg-image">
                         <img src="../assets/images/page-img/profile-bg1.jpg" class="img-fluid w-100" alt="group-bg">

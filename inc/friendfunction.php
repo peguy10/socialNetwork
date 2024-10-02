@@ -18,7 +18,7 @@
     }
     
     function recupererDemandesAmitie($pdo, $id_utilisateur) {
-        $sql = "SELECT d.*, u.nom AS nom_demandeur 
+        $sql = "SELECT d.*,u.photo, u.nom AS nom_demandeur 
                 FROM demandes_amitie d 
                 JOIN createurs u ON d.id_demandeur = u.id_user 
                 WHERE d.id_destinataire = :id_utilisateur AND d.statut = 'en_attente'";
