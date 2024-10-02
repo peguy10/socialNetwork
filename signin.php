@@ -67,10 +67,10 @@
                         <h1 class="mb-0">Sign in</h1>
                         <form class="mt-4" action="scripts/loguser.php" method="POST">
                             
-                            <?php if ($_SESSION['error']) {
+                            <?php if (isset($_SESSION['error'])) {
                                 echo '<div class="alert alert-danger" role="alert">'.$_SESSION['error'].'</div>';
                             }?>
-                            <?php if ($_SESSION['success']) {
+                            <?php if (isset($_SESSION['success'])) {
                                 echo '<div class="alert alert-success" role="alert">'.$_SESSION['error'].'</div>';
                             }?>
                             <div class="form-group">
