@@ -12,6 +12,7 @@ function userLiked($contenu_id) {
     $stmt->execute([$contenu_id, $utilisateur_id]);
     return $stmt->fetch() !== false;
 }
+
 $iduser=$_GET['user_id'];
 $sql = "SELECT c.id, c.type, c.description, c.image, c.video, c.date_creation, u.photo, u.nom AS utilisateur_nom, 
            GROUP_CONCAT(t.nom SEPARATOR ', ') AS tags,
@@ -34,15 +35,15 @@ $contenus = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Fonction pour récupérer tous les utilisateurs sauf celui connecté
 function recupererUtilisateurs($pdo, $id_utilisateur) {
-    $sql = "SELECT id_user, nom, bio, photo, email FROM createurs WHERE id_user = :id_utilisateur";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sql = "SELECT * FROM createurs WHERE id_user = :id_utilisateur";
+    $stmt1 = $pdo->prepare($sql);
+    $stmt1->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
+    $stmt1->execute();
+    return $stmt1->fetch(PDO::FETCH_ASSOC);
 }
 
 // Récupérer tous les utilisateurs
-$utilisateurs = recupererUtilisateurs($pdo, $_GET['user_id']);
+$utilisateurs = recupererUtilisateurs($pdo, $iduser);
 
 ?>
 <!doctype html>
@@ -165,7 +166,6 @@ $utilisateurs = recupererUtilisateurs($pdo, $_GET['user_id']);
                                 <img class="img-fluid avatar-40 rounded-circle" src="../assets/images/user/12.jpg" alt="">
                                 </a>
                             </div>
-                            <button type="submit" class="btn btn-primary mb-2"><i class="ri-add-line me-1"></i>Invite</button>
                         </div>
                     </div>
                 </div>

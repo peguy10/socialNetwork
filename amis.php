@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'inc/db_connect.php';  // Assurez-vous de remplacer par votre fichier de connexion à la base de données
-include('inc/friendfunction.php');
+
 
 // Fonction pour récupérer tous les utilisateurs sauf celui connecté
 function recupererUtilisateurs($pdo, $id_utilisateur) {
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['destinataire'])) {
                             <img src="../assets/images/page-img/gi-1.jpg" alt="profile-img" class="rounded-circle img-fluid avatar-120">
                         </div>
                         <div class="group-info pt-3 pb-3">
-                            <h4><a href="../app/group-detail.html"><?php echo htmlspecialchars($utilisateur['nom']); ?></a></h4>
+                            <h4><a href="userdetails.php?user_id=<?php echo htmlspecialchars($utilisateur['id_user']); ?>"><?php echo htmlspecialchars($utilisateur['nom']); ?></a></h4>
                             <p><?php echo htmlspecialchars($utilisateur['bio']); ?></p>
                         </div>
                         <button type="submit" class="btn btn-primary d-block w-100">Join</button>

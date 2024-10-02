@@ -27,5 +27,19 @@
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }    
+    // Fonction pour récupérer les demandes d'amitié émises par l'utilisateur
+      function recupererDemandesEmises($pdo, $id_utilisateur) {
+         $sql = "SELECT d.*, u.nom AS nom_destinataire 
+               FROM demandes_amitie d 
+               JOIN createurs u ON d.id_destinataire = u.id_user 
+               WHERE d.id_demandeur = :id_utilisateur";
+         $stmt = $pdo->prepare($sql);
+         $stmt->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
+         $stmt->execute();
+         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
+
+      // Récupérer les demandes d'amitié émises par l'utilisateur connecté
+      $demandes_emises = recupererDemandesEmises($pdo, $_SESSION['user_id']);
 
 ?>

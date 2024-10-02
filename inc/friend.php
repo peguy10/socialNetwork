@@ -1,5 +1,15 @@
 <?php
-     include('friendfunction.php');
+
+function recupererDemandesAmitie($pdo, $id_utilisateur) {
+    $sql = "SELECT d.*,u.photo, u.nom AS nom_demandeur 
+            FROM demandes_amitie d 
+            JOIN createurs u ON d.id_demandeur = u.id_user 
+            WHERE d.id_destinataire = :id_utilisateur AND d.statut = 'en_attente'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}   
 ?>
 <li class="nav-item dropdown">
     <a href="#" class="dropdown-toggle" id="group-drop" data-bs-toggle="dropdown"
