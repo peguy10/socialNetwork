@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>SocialV | Responsive Bootstrap 5 Admin Dashboard Template</title>
+      <title>Creator Network</title>
       
       <link rel="shortcut icon" href="assets/images/favicon.ico" />
       <link rel="stylesheet" href="assets/css/libs.min.css">
@@ -20,10 +20,7 @@
   </head>
   <body class="  ">
     <!-- loader Start -->
-    <div id="loading">
-          <div id="loading-center">
-          </div>
-    </div>
+    
     <!-- loader END -->
     <!-- Wrapper Start -->
     <div class="wrapper">

@@ -1,7 +1,7 @@
        <?php
     // Fonction pour récupérer les demandes d'amitié émises par l'utilisateur
       function recupererDemandesEmises($pdo, $id_utilisateur) {
-         $sql = "SELECT d.*,photo, u.nom AS nom_destinataire 
+         $sql = "SELECT d.*,photo, id_user, u.nom AS nom_destinataire 
                FROM demandes_amitie d 
                JOIN createurs u ON d.id_destinataire = u.id_user 
                WHERE d.id_demandeur = :id_utilisateur";
@@ -28,6 +28,7 @@
                               <div class="ms-3">
                                  <h6 class="mb-0"><?php echo htmlspecialchars($demande['nom_destinataire']); ?></h6>
                                  <p class="mb-0"><?php echo htmlspecialchars($demande['statut']); ?></p>
+                                 <a href="sms.php?id=<?php echo $demande['id_user'];?>" class="btn btn-primary border-0 "><i class="ri-chat-3-line"></i></a>
                               </div>
                            </div>
                         <?php endforeach; ?>

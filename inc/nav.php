@@ -13,7 +13,7 @@
         </li>
         <li class="">
             <a href="creer_contenu.php" class=" ">
-                <i class="las la-check-circle"></i><span>Contenus</span>
+             <i class="ri-file-text-line"></i><span>Contenus</span>
             </a>
         </li>
         <li class="">
@@ -21,10 +21,10 @@
                 <i class="las la-users"></i><span>Amis</span>
             </a>
         </li>
-        <li class=" ">
-            <a href="dashboard/calendar.html" class=" ">
-                <i class="las la-calendar"></i><span>Calendar</span>
+        <!-- <li class=" ">
+            <a href="sms.php" class=" ">
+                <i class="ri-chat-3-line"></i><span>sms</span>
             </a>
-        </li>
+        </li> -->
     </ul>
 </nav>
