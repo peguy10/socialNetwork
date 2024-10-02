@@ -1,23 +1,14 @@
 <?php
 session_start();
-require 'inc/db_connect.php'; // Assurez-vous de remplacer par votre fichier de connexion à la base de données
+require 'inc/db_connect.php';  // Assurez-vous de remplacer par votre fichier de connexion à la base de données
 
 // Fonction pour récupérer tous les utilisateurs sauf celui connecté
 function recupererUtilisateurs($pdo, $id_utilisateur) {
-    $sql = "SELECT id_user, nom FROM createurs WHERE id_user != :id_utilisateur";
+    $sql = "SELECT id_user, nom,bio FROM createurs WHERE id_user != :id_utilisateur";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-// Fonction pour envoyer une demande d'amitié
-function envoyerDemandeAmitie($pdo, $id_demandeur, $id_destinataire) {
-    $sql = "INSERT INTO demandes_amitie (id_demandeur, id_destinataire) VALUES (:id_demandeur, :id_destinataire)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':id_demandeur', $id_demandeur, PDO::PARAM_INT);
-    $stmt->bindParam(':id_destinataire', $id_destinataire, PDO::PARAM_INT);
-    return $stmt->execute();
 }
 
 // Récupérer tous les utilisateurs
@@ -124,59 +115,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['destinataire'])) {
       <div id="content-page" class="content-page">
         <div class="container">
             <div class="d-grid gap-3 d-grid-template-1fr-19">
+            <form method="POST" action=""> 
+                <input type="hidden" name="destinataire" value="<?php echo $utilisateur['id_user']; ?>">
+             <?php foreach ($utilisateurs as $utilisateur): ?>
                 <div class="card mb-0">
                     <div class="top-bg-image">
                         <img src="../assets/images/page-img/profile-bg1.jpg" class="img-fluid w-100" alt="group-bg">
+                        <?php if (isset($message)): ?>
+                            <p><?php echo htmlspecialchars($message); ?></p>
+                        <?php endif; ?>
                     </div>
                     <div class="card-body text-center">
                         <div class="group-icon">
                             <img src="../assets/images/page-img/gi-1.jpg" alt="profile-img" class="rounded-circle img-fluid avatar-120">
                         </div>
                         <div class="group-info pt-3 pb-3">
-                            <h4><a href="../app/group-detail.html">Designer</a></h4>
-                            <p>Lorem Ipsum data</p>
-                        </div>
-                        <div class="group-details d-inline-block pb-3">
-                            <ul class="d-flex align-items-center justify-content-between list-inline m-0 p-0">
-                                <li class="pe-3 ps-3">
-                                    <p class="mb-0">Post</p>
-                                    <h6>600</h6>
-                                </li>
-                                <li class="pe-3 ps-3">
-                                    <p class="mb-0">Member</p>
-                                    <h6>320</h6>
-                                </li>
-                                <li class="pe-3 ps-3">
-                                    <p class="mb-0">Visit</p>
-                                    <h6>1.2k</h6>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="group-member mb-3">
-                            <div class="iq-media-group">
-                                <a href="#" class="iq-media">
-                                    <img class="img-fluid avatar-40 rounded-circle" src="../assets/images/user/05.jpg" alt="">
-                                </a>
-                                <a href="#" class="iq-media">
-                                    <img class="img-fluid avatar-40 rounded-circle" src="../assets/images/user/06.jpg" alt="">
-                                </a>
-                                <a href="#" class="iq-media">
-                                    <img class="img-fluid avatar-40 rounded-circle" src="../assets/images/user/07.jpg" alt="">
-                                </a>
-                                <a href="#" class="iq-media">
-                                    <img class="img-fluid avatar-40 rounded-circle" src="../assets/images/user/08.jpg" alt="">
-                                </a>
-                                <a href="#" class="iq-media">
-                                    <img class="img-fluid avatar-40 rounded-circle" src="../assets/images/user/09.jpg" alt="">
-                                </a>
-                                <a href="#" class="iq-media">
-                                    <img class="img-fluid avatar-40 rounded-circle" src="../assets/images/user/10.jpg" alt="">
-                                </a>
-                            </div>
+                            <h4><a href="../app/group-detail.html"><?php echo htmlspecialchars($utilisateur['nom']); ?></a></h4>
+                            <p><?php echo htmlspecialchars($utilisateur['bio']); ?></p>
                         </div>
                         <button type="submit" class="btn btn-primary d-block w-100">Join</button>
                     </div>
                 </div>
+            <?php endforeach; ?>
+            </form>
             </div>
         </div>
       </div>
