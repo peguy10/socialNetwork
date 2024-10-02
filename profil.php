@@ -15,6 +15,22 @@
    $stmt1->bindParam(':id_user', $user, PDO::PARAM_INT);
    $stmt1->execute();
    $contents = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+   // Fonction pour récupérer les demandes d'amitié acceptées par l'utilisateur
+   function recupererDemandesAcceptees($pdo, $id_utilisateur) {
+       $sql = "SELECT d.*,photo, u.nom AS nom_autre_utilisateur 
+               FROM demandes_amitie d 
+               JOIN createurs u ON (d.id_demandeur = u.id_user OR d.id_destinataire = u.id_user) 
+               WHERE (d.id_demandeur = :id_utilisateur OR d.id_destinataire = :id_utilisateur) 
+               AND u.id_user != :id_utilisateur
+               AND d.statut = 'accepte'";
+       $stmt = $pdo->prepare($sql);
+       $stmt->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
+       $stmt->execute();
+       return $stmt->fetchAll(PDO::FETCH_ASSOC);
+   }
+   
+   // Récupérer les demandes d'amitié acceptées par l'utilisateur connecté
+   $demandes_acceptees = recupererDemandesAcceptees($pdo, $_SESSION['user_id']);
 ?>
 <!doctype html>
 <html lang="en">
@@ -147,15 +163,11 @@
                                     <ul class="social-data-block d-flex align-items-center justify-content-between list-inline p-0 m-0">
                                     <li class="text-center ps-3">
                                         <h6>Posts</h6>
-                                        <p class="mb-0">690</p>
+                                        <p class="mb-0"><?php echo count($contents);?></p>
                                     </li>
                                     <li class="text-center ps-3">
-                                        <h6>Followers</h6>
-                                        <p class="mb-0">206</p>
-                                    </li>
-                                    <li class="text-center ps-3">
-                                        <h6>Following</h6>
-                                        <p class="mb-0">100</p>
+                                        <h6>Amis</h6>
+                                        <p class="mb-0"><?php echo count($demandes_acceptees);?></p>
                                     </li>
                                     </ul>
                                 </div>
@@ -215,51 +227,26 @@
                                         <div class="card">
                                         <div class="card-header d-flex justify-content-between">
                                             <div class="header-title">
-                                                <h4 class="card-title">Friends</h4>
+                                                <h4 class="card-title">AMIS</h4>
                                             </div>
                                             <div class="card-header-toolbar d-flex align-items-center">
-                                                <p class="m-0"><a href="javacsript:void();">Add New </a></p>
+                                                <p class="m-0"><a href="amis.php">Add New </a></p>
                                             </div>
                                         </div>
                                         <div class="card-body">
                                             <ul class="profile-img-gallary p-0 m-0 list-unstyled">
-                                                <li class="">
-                                                    <a href="#">
-                                                    <img src="../assets/images/user/05.jpg" alt="gallary-image" class="img-fluid" /></a>
-                                                    <h6 class="mt-2 text-center">Anna Rexia</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img src="../assets/images/user/06.jpg" alt="gallary-image" class="img-fluid" /></a>
-                                                    <h6 class="mt-2 text-center">Tara Zona</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img src="../assets/images/user/07.jpg" alt="gallary-image" class="img-fluid" /></a>
-                                                    <h6 class="mt-2 text-center">Polly Tech</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img src="../assets/images/user/08.jpg" alt="gallary-image" class="img-fluid" /></a>
-                                                    <h6 class="mt-2 text-center">Bill Emia</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img src="../assets/images/user/09.jpg" alt="gallary-image" class="img-fluid" /></a>
-                                                    <h6 class="mt-2 text-center">Moe Fugga</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img src="../assets/images/user/10.jpg" alt="gallary-image" class="img-fluid" /></a>
-                                                    <h6 class="mt-2 text-center">Hal Appeno </h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img src="../assets/images/user/07.jpg" alt="gallary-image" class="img-fluid" /></a>
-                                                    <h6 class="mt-2 text-center">Zack Lee</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img src="../assets/images/user/06.jpg" alt="gallary-image" class="img-fluid" /></a>
-                                                    <h6 class="mt-2 text-center">Terry Aki</h6>
-                                                </li>
-                                                <li class="">
-                                                    <a href="#"><img src="../assets/images/user/05.jpg" alt="gallary-image" class="img-fluid" /></a>
-                                                    <h6 class="mt-2 text-center">Greta Life</h6>
-                                                </li>
+                                                
+                                                <?php if (count($demandes_acceptees) > 0): ?>
+                                                    <?php foreach ($demandes_acceptees as $demande): ?>
+                                                    <li class="">
+                                                        <a href="#">
+                                                        <img src="<?php echo htmlspecialchars($demande['photo']); ?>" alt="gallary-image" class="img-fluid" /></a>
+                                                        <h6 class="mt-2 text-center"><?php echo htmlspecialchars($demande['nom_autre_utilisateur']); ?></h6>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                                <?php else: ?>
+                                                    <p>Aucune demande d'amitié acceptée.</p>
+                                                <?php endif; ?>
                                             </ul>
                                         </div>
                                         </div>
@@ -267,145 +254,7 @@
                                     <div class="col-lg-8">
                                         <div id="post-modal-data" class="card">
                                         <div class="card-header d-flex justify-content-between">
-                                            <div class="header-title">
-                                                <h4 class="card-title">Create Post</h4>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="user-img">
-                                                    <img src="../assets/images/user/1.jpg" alt="userimg" class="avatar-60 rounded-circle">
-                                                </div>
-                                                <form class="post-text ms-3 w-100 "  data-bs-toggle="modal" data-bs-target="#post-modal" action="#">
-                                                    <input type="text" class="form-control rounded" placeholder="Write something here..." style="border:none;">
-                                                </form>
-                                            </div>
-                                            <hr>
-                                            <ul class=" post-opt-block d-flex list-inline m-0 p-0 flex-wrap">
-                                                    <li class="bg-soft-primary rounded p-2 pointer d-flex align-items-center me-3 mb-md-0 mb-2"><img src="../assets/images/small/07.png" alt="icon" class="img-fluid me-2"> Photo/Video</li>
-                                                    <li class="bg-soft-primary rounded p-2 pointer d-flex align-items-center me-3 mb-md-0 mb-2"><img src="../assets/images/small/08.png" alt="icon" class="img-fluid me-2"> Tag Friend</li>
-                                                    <li class="bg-soft-primary rounded p-2 pointer d-flex align-items-center me-3"><img src="../assets/images/small/09.png" alt="icon" class="img-fluid me-2"> Feeling/Activity</li>
-                                                    <li class="bg-soft-primary rounded p-2 pointer text-center">
-                                                        <div class="card-header-toolbar d-flex align-items-center">
-                                                        <div class="dropdown">
-                                                            <div class="dropdown-toggle" id="post-option"   data-bs-toggle="dropdown">
-                                                                <i class="ri-more-fill h4"></i>
-                                                            </div>
-                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="post-option" style="">
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#post-modal">Check in</a>
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#post-modal">Live Video</a>
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#post-modal">Gif</a>
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#post-modal">Watch Party</a>
-                                                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#post-modal">Play with Friend</a>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                        </div>
-                                        <div class="modal fade" id="post-modal" tabindex="-1"  aria-labelledby="post-modalLabel" aria-hidden="true" >
-                                            <div class="modal-dialog  modal-lg modal-fullscreen-sm-down">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                    <h5 class="modal-title" id="post-modalLabel">Create Post</h5>
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="ri-close-fill"></i></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="user-img">
-                                                            <img src="../assets/images/user/1.jpg" alt="userimg" class="avatar-60 rounded-circle img-fluid">
-                                                        </div>
-                                                        <form class="post-text ms-3 w-100" action="#">
-                                                            <input type="text" class="form-control rounded" placeholder="Write something here..." style="border:none;">
-                                                        </form>
-                                                    </div>
-                                                    <hr>
-                                                    <ul class="d-flex flex-wrap align-items-center list-inline m-0 p-0">
-                                                        <li class="col-md-6 mb-3">
-                                                            <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="../assets/images/small/07.png" alt="icon" class="img-fluid"> Photo/Video</div>
-                                                        </li>
-                                                        <li class="col-md-6 mb-3">
-                                                            <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="../assets/images/small/08.png" alt="icon" class="img-fluid"> Tag Friend</div>
-                                                        </li>
-                                                        <li class="col-md-6 mb-3">
-                                                            <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="../assets/images/small/09.png" alt="icon" class="img-fluid"> Feeling/Activity</div>
-                                                        </li>
-                                                        <li class="col-md-6 mb-3">
-                                                            <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="../assets/images/small/10.png" alt="icon" class="img-fluid"> Check in</div>
-                                                        </li>
-                                                        <li class="col-md-6 mb-3">
-                                                            <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="../assets/images/small/11.png" alt="icon" class="img-fluid"> Live Video</div>
-                                                        </li>
-                                                        <li class="col-md-6 mb-3">
-                                                            <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="../assets/images/small/12.png" alt="icon" class="img-fluid"> Gif</div>
-                                                        </li>
-                                                        <li class="col-md-6 mb-3">
-                                                            <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="../assets/images/small/13.png" alt="icon" class="img-fluid"> Watch Party</div>
-                                                        </li>
-                                                        <li class="col-md-6 mb-3">
-                                                            <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="../assets/images/small/14.png" alt="icon" class="img-fluid"> Play with Friends</div>
-                                                        </li>
-                                                    </ul>
-                                                    <hr>
-                                                    <div class="other-option">
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="user-img me-3">
-                                                                <img src="../assets/images/user/1.jpg" alt="userimg" class="avatar-60 rounded-circle img-fluid">
-                                                                </div>
-                                                                <h6>Your Story</h6>
-                                                            </div>
-                                                            <div class="card-post-toolbar">
-                                                                <div class="dropdown">
-                                                                <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                                                <span class="btn btn-primary">Friend</span>
-                                                                </span>
-                                                                <div class="dropdown-menu m-0 p-0">
-                                                                    <a class="dropdown-item p-3" href="#">
-                                                                        <div class="d-flex align-items-top">
-                                                                            <i class="ri-save-line h4"></i>
-                                                                            <div class="data ms-2">
-                                                                            <h6>Public</h6>
-                                                                            <p class="mb-0">Anyone on or off Facebook</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a class="dropdown-item p-3" href="#">
-                                                                        <div class="d-flex align-items-top">
-                                                                        <i class="ri-close-circle-line h4"></i>
-                                                                            <div class="data ms-2">
-                                                                            <h6>Friends</h6>
-                                                                            <p class="mb-0">Your Friend on facebook</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a class="dropdown-item p-3" href="#">
-                                                                        <div class="d-flex align-items-top">
-                                                                        <i class="ri-user-unfollow-line h4"></i>
-                                                                            <div class="data ms-2">
-                                                                            <h6>Friends except</h6>
-                                                                            <p class="mb-0">Don't show to some friends</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                    <a class="dropdown-item p-3" href="#">
-                                                                        <div class="d-flex align-items-top">
-                                                                        <i class="ri-notification-line h4"></i>
-                                                                            <div class="data ms-2">
-                                                                            <h6>Only Me</h6>
-                                                                            <p class="mb-0">Only me</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary d-block w-100 mt-3">Post</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <h2>Vos publications</h2>
                                         </div>
                                     </div>
                                         <div class="card">
@@ -473,12 +322,9 @@
                                     <h2>Friends</h2>
                                     <div class="friend-list-tab mt-2">
                                         <ul class="nav nav-pills d-flex align-items-center justify-content-left friend-list-items p-0 mb-2">
-                                        <li>
-                                            <a class="nav-link active" data-bs-toggle="pill" href="#pill-all-friends" data-bs-target="#all-feinds">All Friends</a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link" data-bs-toggle="pill" href="#pill-following" data-bs-target="#following">Following</a>
-                                        </li>
+                                            <li>
+                                                <a class="nav-link active" data-bs-toggle="pill" href="#pill-all-friends" data-bs-target="#all-feinds">All Friends</a>
+                                            </li>
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane fade active show" id="all-friends" role="tabpanel">
@@ -486,31 +332,19 @@
                                                     <div class="row">
                                                         <div class="col-md-6 col-lg-6 mb-3">
                                                             <div class="iq-friendlist-block">
-                                                                <div class="d-flex align-items-center justify-content-between">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <a href="#">
-                                                                        <img src="../assets/images/user/05.jpg" alt="profile-img" class="img-fluid">
-                                                                        </a>
-                                                                        <div class="friend-info ms-3">
-                                                                        <h5>Petey Cruiser</h5>
-                                                                        <p class="mb-0">15  friends</p>
+                                                                
+                                                                <?php foreach ($demandes_acceptees as $demande): ?>
+                                                                    <div class="d-flex align-items-center justify-content-between">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <a href="#">
+                                                                            <img src="<?php echo htmlspecialchars($demande['photo']); ?>" alt="profile-img" class="img-fluid logo w-50">
+                                                                            </a>
+                                                                            <div class="friend-info ms-3">
+                                                                            <h5><?php echo htmlspecialchars($demande['nom_autre_utilisateur']); ?></h5>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="card-header-toolbar d-flex align-items-center">
-                                                                        <div class="dropdown">
-                                                                        <span class="dropdown-toggle btn btn-secondary me-2" id="dropdownMenuButton01" data-bs-toggle="dropdown" aria-expanded="true" role="button">
-                                                                        <i class="ri-check-line me-1 text-white"></i> Friend
-                                                                        </span>
-                                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton01">
-                                                                            <a class="dropdown-item" href="#">Get Notification</a>
-                                                                            <a class="dropdown-item" href="#">Close Friend</a>
-                                                                            <a class="dropdown-item" href="#">Unfollow</a>
-                                                                            <a class="dropdown-item" href="#">Unfriend</a>
-                                                                            <a class="dropdown-item" href="#">Block</a>
-                                                                        </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                <?php endforeach; ?>
                                                             </div>
                                                         </div>
                                                     </div>
