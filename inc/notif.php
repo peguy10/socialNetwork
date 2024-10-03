@@ -6,11 +6,11 @@
             <div class="card shadow-none m-0">
                 <div class="card-header d-flex justify-content-between bg-primary">
                 <div class="header-title bg-primary">
-                            <h5 class="mb-0 text-white">All Notifications</h5>
+                            <h5 class="mb-0 text-white">Notifications</h5>
                             </div>
-                        <small class="badge  bg-light text-dark">4</small>
+                        <small class="badge  bg-light text-dark">0</small>
                 </div>
-                <div class="card-body p-0">
+                <!-- <div class="card-body p-0">
                     <a href="#" class="iq-sub-card">
                         <div class="d-flex align-items-center">
                                 <div class="">
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> -->
             </div>
         </div>
 </li>

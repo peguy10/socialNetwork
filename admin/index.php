@@ -48,7 +48,7 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
+			<a href="#" class="nav-link"></a>
 			<form action="#">
 				<div class="form-input">
 					<input type="search" placeholder="Search...">
@@ -82,9 +82,9 @@
 						</li>
 					</ul>
 				</div>
-				<a href="#" class="btn-download">
+				<a href="../" class="btn-download">
 					<i class='bx bxs-cloud-download' ></i>
-					<span class="text">Download PDF</span>
+					<span class="text">Accueil</span>
 				</a>
 			</div>
 
@@ -137,7 +137,7 @@
 											<td>
 													<img src="<?php echo $content['image'];?>">
 												<a href="../">
-													<p><?php echo $content['description'];?></p>
+													<p><?php echo substr($content['description'], 0, 50);?>... </p>
 												</a>
 											</td>
 											<td><?php echo $content['date_creation'];?></td>

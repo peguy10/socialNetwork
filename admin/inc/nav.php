@@ -18,11 +18,11 @@
 			</li>
 			<li>
 				<a href="#">
-					<i class='bx bxs-doughnut-chart' ></i>
+					<i class='bx bxs-group' ></i>
 					<span class="text">utilisateurs</span>
 				</a>
 			</li>
-			<li>
+			<!-- <li>
 				<a href="#">
 					<i class='bx bxs-message-dots' ></i>
 					<span class="text">Message</span>
@@ -33,7 +33,7 @@
 					<i class='bx bxs-group' ></i>
 					<span class="text">Team</span>
 				</a>
-			</li>
+			</li> -->
 		</ul>
 		<ul class="side-menu">
 			<li>

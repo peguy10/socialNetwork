@@ -40,23 +40,13 @@
             <div class="row no-gutters">
                 <div class="col-md-6 text-center pt-5">
                     <div class="sign-in-detail text-white">
-                        <a class="sign-in-logo mb-5" href="#"><img src="assets/images/logo-full.png" class="img-fluid" alt="logo"></a>
+                        <!-- <a class="sign-in-logo mb-5" href="#"><img src="assets/images/logo.png" class="img-fluid w-50 h-50" alt="logo"></a> -->
                         <div class="sign-slider overflow-hidden ">
                             <ul  class="swiper-wrapper list-inline m-0 p-0 ">
                                 <li class="swiper-slide">
-                                    <img src="assets/images/login/1.png" class="img-fluid mb-4" alt="logo">
-                                    <h4 class="mb-1 text-white">Find new friends</h4>
-                                    <p>It is a long established fact that a reader will be distracted by the readable content.</p>
-                                </li>
-                                <li class="swiper-slide">
-                                    <img src="assets/images/login/2.png" class="img-fluid mb-4" alt="logo"> 
-                                    <h4 class="mb-1 text-white">Connect with the world</h4>
-                                    <p>It is a long established fact that a reader will be distracted by the readable content.</p>
-                                </li>
-                                <li class="swiper-slide">
-                                    <img src="assets/images/login/3.png" class="img-fluid mb-4" alt="logo">
-                                    <h4 class="mb-1 text-white">Create new events</h4>
-                                    <p>It is a long established fact that a reader will be distracted by the readable content.</p>
+                                    <img src="assets/images/logo.png" class="img-fluid mb-4" alt="logo">
+                                    <h4 class="mb-1 text-white">Trouver de nouveaux amis</h4>
+                                    <!-- <p>It is a long established fact that a reader will be distracted by the readable content.</p> -->
                                 </li>
                             </ul>
                         </div>
@@ -67,11 +57,8 @@
                         <h1 class="mb-0">Sign in</h1>
                         <form class="mt-4" action="scripts/loguser.php" method="POST">
                             
-                            <?php if (isset($_SESSION['error'])) {
-                                echo '<div class="alert alert-danger" role="alert">'.$_SESSION['error'].'</div>';
-                            }?>
                             <?php if (isset($_SESSION['success'])) {
-                                echo '<div class="alert alert-success" role="alert">'.$_SESSION['error'].'</div>';
+                                echo '<div class="alert alert-success" role="alert">'.$_SESSION['success'].'</div>';
                             }?>
                             <div class="form-group">
                                 <label class="form-label" for="exampleInputEmail1">Email address</label>

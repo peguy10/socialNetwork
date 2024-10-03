@@ -53,13 +53,10 @@ function recupererMesContenus($pdo, $iduser) {
                (SELECT COUNT(*) FROM commentaires WHERE contenu_id = c.id) AS nombre_commentaires,
                (SELECT COUNT(*) FROM likes WHERE contenu_id = c.id) AS nombre_likes
         FROM contenus c
-        WHERE c.utilisateur_id = :iduser
         ORDER BY c.date_creation DESC 
-        LIMIT 3
     ";
     
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':iduser', $iduser, PDO::PARAM_INT);
     $stmt->execute();
     
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

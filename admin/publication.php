@@ -112,7 +112,7 @@
 											<td>
 													<img src="<?php echo $content['image'];?>">
 												<a href="../">
-													<p><?php echo $content['description'];?></p>
+													<p><?php echo substr($content['description'], 0, 100);?>... </p>
 												</a>
 											</td>
 											<td><?php echo $content['date_creation'];?></td>

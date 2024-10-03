@@ -5,7 +5,7 @@ require 'inc/db_connect.php';  // Assurez-vous de remplacer par votre fichier de
 
 // Fonction pour récupérer tous les utilisateurs sauf celui connecté
 function recupererUtilisateurs($pdo, $id_utilisateur) {
-    $sql = "SELECT id_user, nom,bio FROM createurs WHERE id_user != :id_utilisateur";
+    $sql = "SELECT id_user,photo, nom,bio FROM createurs WHERE id_user != :id_utilisateur";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id_utilisateur', $id_utilisateur, PDO::PARAM_INT);
     $stmt->execute();
@@ -15,6 +15,14 @@ function recupererUtilisateurs($pdo, $id_utilisateur) {
 // Récupérer tous les utilisateurs
 $utilisateurs = recupererUtilisateurs($pdo, $_SESSION['user_id']);
 
+
+function envoyerDemandeAmitie($pdo, $id_demandeur, $id_destinataire) {
+   $sql = "INSERT INTO demandes_amitie (id_demandeur, id_destinataire) VALUES (:id_demandeur, :id_destinataire)";
+   $stmt = $pdo->prepare($sql);
+   $stmt->bindParam(':id_demandeur', $id_demandeur, PDO::PARAM_INT);
+   $stmt->bindParam(':id_destinataire', $id_destinataire, PDO::PARAM_INT);
+   return $stmt->execute();
+}
 // Vérifier si une demande a été envoyée
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['destinataire'])) {
     $id_destinataire = $_POST['destinataire'];
@@ -116,19 +124,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['destinataire'])) {
       <div id="content-page" class="content-page">
         <div class="container">
             <div class="d-grid gap-3 d-grid-template-1fr-19">
-            <form method="POST" action=""> 
              <?php foreach ($utilisateurs as $utilisateur): ?>
+            <form method="POST" action="" style="display:inline-block;"> 
                 <input type="hidden" name="destinataire" value="<?php echo $utilisateur['id_user']; ?>">
-                <div class="card mb-0">
+                <div class="card mt-3">
                     <div class="top-bg-image">
-                        <img src="../assets/images/page-img/profile-bg1.jpg" class="img-fluid w-100" alt="group-bg">
+                        <img src="" alt="">
                         <?php if (isset($message)): ?>
                             <p><?php echo htmlspecialchars($message); ?></p>
                         <?php endif; ?>
                     </div>
                     <div class="card-body text-center">
                         <div class="group-icon">
-                            <img src="../assets/images/page-img/gi-1.jpg" alt="profile-img" class="rounded-circle img-fluid avatar-120">
+                            <img src="<?php echo $utilisateur['photo']; ?>" alt="profile-img" class="rounded-circle img-fluid avatar-120">
                         </div>
                         <div class="group-info pt-3 pb-3">
                             <h4><a href="userdetails.php?user_id=<?php echo htmlspecialchars($utilisateur['id_user']); ?>"><?php echo htmlspecialchars($utilisateur['nom']); ?></a></h4>
@@ -137,8 +145,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['destinataire'])) {
                         <button type="submit" class="btn btn-primary d-block w-100">Join</button>
                     </div>
                 </div>
-            <?php endforeach; ?>
             </form>
+            <?php endforeach; ?>
             </div>
         </div>
       </div>

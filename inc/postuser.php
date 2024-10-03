@@ -57,7 +57,6 @@
                         <div class="d-flex justify-content-between">
                             <div class="">
                                 <h5 class="mb-0 d-inline-block"><?php echo $contenu['utilisateur_nom'];?></h5>
-                                <span class="mb-0 d-inline-block">Add New Post</span>
                                 <p class="mb-0 text-primary"><?php echo $contenu['date_creation'];?></p>
                             </div>
                             <div class="card-post-toolbar">

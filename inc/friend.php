@@ -10,6 +10,7 @@ function recupererDemandesAmitie($pdo, $id_utilisateur) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }   
+$demandes = recupererDemandesAmitie($pdo, $_SESSION['user_id']);
 ?>
 <li class="nav-item dropdown">
     <a href="#" class="dropdown-toggle" id="group-drop" data-bs-toggle="dropdown"
@@ -20,11 +21,10 @@ function recupererDemandesAmitie($pdo, $id_utilisateur) {
                 <div class="header-title">
                 <h5 class="mb-0 text-white">Demande d'amitié</h5>
                 </div>
-                <small class="badge  bg-light text-dark ">4</small>
+                <small class="badge  bg-light text-dark "><?php echo count($demandes);?></small>
             </div>
             <div class="card-body p-0">
                 <?php
-                    $demandes = recupererDemandesAmitie($pdo, $_SESSION['user_id']);
                     foreach ($demandes as $demande) {?>
                         <div class="iq-friend-request">
                             <div

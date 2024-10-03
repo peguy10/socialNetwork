@@ -41,7 +41,7 @@
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                   <div class="iq-navbar-logo d-flex justify-content-between">
                      <a href="./">
-                        <img src="assets/images/logo1.png" class="img-fluid h-20" alt="" width="100px">
+                        <img src="assets/images/logo.png" class="img-fluid w-10 h-20" alt="">
                         <span>Creator network</span>
                      </a>
                      <div class="iq-menu-bt align-self-center">
@@ -64,7 +64,7 @@
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                      <ul class="navbar-nav  ms-auto navbar-list">
                         <li>
-                              <a href="dashboard/index.html" class="  d-flex align-items-center">
+                              <a href="../" class="  d-flex align-items-center">
                                  <i class="ri-home-line"></i>
                               </a>
                         </li>
@@ -96,7 +96,7 @@
                      <div id="post-modal-data" class="card card-block card-stretch card-height">
                         <div class="card-header d-flex justify-content-between">
                            <div class="header-title">
-                              <h4 class="card-title">Create Post</h4>
+                              <h4 class="card-title">Publication</h4>
                            </div>
                         </div>
                         <div class="card-body">
@@ -152,100 +152,106 @@
                                     <h5 class="modal-title" id="post-modalLabel">Create Post</h5>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="ri-close-fill"></i></button>
                                  </div>
-                                 <div class="modal-body">
-                                    <div class="d-flex align-items-center">
-                                       <div class="user-img">
-                                          <img src="<?php echo $_SESSION['photo'];?>" alt="userimg" class="avatar-60 rounded-circle img-fluid">
-                                       </div>
-                                       <form class="post-text ms-3 w-100" action="javascript:void();">
-                                          <input type="text" class="form-control rounded" placeholder="Write something here..." style="border:none;">
-                                       </form>
-                                    </div>
-                                    <hr>
-                                    <ul class="d-flex flex-wrap align-items-center list-inline m-0 p-0">
-                                       <li class="col-md-6 mb-3">
-                                          <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/07.png" alt="icon" class="img-fluid"> Photo/Video</div>
-                                       </li>
-                                       <li class="col-md-6 mb-3">
-                                          <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/08.png" alt="icon" class="img-fluid"> Tag Friend</div>
-                                       </li>
-                                       <li class="col-md-6 mb-3">
-                                          <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/09.png" alt="icon" class="img-fluid"> Feeling/Activity</div>
-                                       </li>
-                                       <li class="col-md-6 mb-3">
-                                          <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/10.png" alt="icon" class="img-fluid"> Check in</div>
-                                       </li>
-                                       <li class="col-md-6 mb-3">
-                                          <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/11.png" alt="icon" class="img-fluid"> Live Video</div>
-                                       </li>
-                                       <li class="col-md-6 mb-3">
-                                          <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/12.png" alt="icon" class="img-fluid"> Gif</div>
-                                       </li>
-                                       <li class="col-md-6 mb-3">
-                                          <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/13.png" alt="icon" class="img-fluid"> Watch Party</div>
-                                       </li>
-                                       <li class="col-md-6 mb-3">
-                                          <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/14.png" alt="icon" class="img-fluid"> Play with Friends</div>
-                                       </li>
-                                    </ul>
-                                    <hr>
-                                    <div class="other-option">
-                                       <div class="d-flex align-items-center justify-content-between">
-                                          <div class="d-flex align-items-center">
-                                             <div class="user-img me-3">
-                                                <img src="<?php echo $_SESSION['photo'];?>" alt="userimg" class="avatar-60 rounded-circle img-fluid">
-                                             </div>
-                                             <h6>Your Story</h6>
+                                 <form class="post-text ms-3 w-100" action="scripts/addcontent.php" method="POST" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                       <div class="d-flex align-items-center">
+                                          <div class="user-img">
+                                             <img src="<?php echo $_SESSION['photo'];?>" alt="userimg" class="avatar-60 rounded-circle img-fluid">
                                           </div>
-                                          <div class="card-post-toolbar">
-                                             <div class="dropdown">
-                                                <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                                <span class="btn btn-primary">Friend</span>
-                                                </span>
-                                                <div class="dropdown-menu m-0 p-0">
-                                                   <a class="dropdown-item p-3" href="#">
-                                                      <div class="d-flex align-items-top">
-                                                         <i class="ri-save-line h4"></i>
-                                                         <div class="data ms-2">
-                                                            <h6>Public</h6>
-                                                            <p class="mb-0">Anyone on or off Facebook</p>
+                                             <input type="hidden" name="type_contenu" value="image">
+                                             <input type="hidden" class="form-control" name="tags" value="none">
+                                             <div>
+                                                <textarea class="form-control rounded mt-3" placeholder="Inserer le contenu..." name="description" style="border:none;" rows="3" cols="65"></textarea>
+                                             </div>
+                                       </div>
+                                             <div>
+                                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                             </div>
+                                       <hr>
+                                       <!-- <ul class="d-flex flex-wrap align-items-center list-inline m-0 p-0">
+                                          <li class="col-md-6 mb-3">
+                                             <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/07.png" alt="icon" class="img-fluid"> Photo/Video</div>
+                                          </li>
+                                          <li class="col-md-6 mb-3">
+                                             <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/08.png" alt="icon" class="img-fluid"> Tag Friend</div>
+                                          </li>
+                                          <li class="col-md-6 mb-3">
+                                             <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/09.png" alt="icon" class="img-fluid"> Feeling/Activity</div>
+                                          </li>
+                                          <li class="col-md-6 mb-3">
+                                             <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/10.png" alt="icon" class="img-fluid"> Check in</div>
+                                          </li>
+                                          <li class="col-md-6 mb-3">
+                                             <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/11.png" alt="icon" class="img-fluid"> Live Video</div>
+                                          </li>
+                                          <li class="col-md-6 mb-3">
+                                             <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/12.png" alt="icon" class="img-fluid"> Gif</div>
+                                          </li>
+                                          <li class="col-md-6 mb-3">
+                                             <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/13.png" alt="icon" class="img-fluid"> Watch Party</div>
+                                          </li>
+                                          <li class="col-md-6 mb-3">
+                                             <div class="bg-soft-primary rounded p-2 pointer me-3"><a href="#"></a><img src="assets/images/small/14.png" alt="icon" class="img-fluid"> Play with Friends</div>
+                                          </li>
+                                       </ul> -->
+                                       <!-- <div class="other-option">
+                                          <div class="d-flex align-items-center justify-content-between">
+                                             <div class="d-flex align-items-center">
+                                                <div class="user-img me-3">
+                                                   <img src="<?php echo $_SESSION['photo'];?>" alt="userimg" class="avatar-60 rounded-circle img-fluid">
+                                                </div>
+                                                <h6>Your Story</h6>
+                                             </div>
+                                             <div class="card-post-toolbar">
+                                                <div class="dropdown">
+                                                   <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                   <span class="btn btn-primary">Friend</span>
+                                                   </span>
+                                                   <div class="dropdown-menu m-0 p-0">
+                                                      <a class="dropdown-item p-3" href="#">
+                                                         <div class="d-flex align-items-top">
+                                                            <i class="ri-save-line h4"></i>
+                                                            <div class="data ms-2">
+                                                               <h6>Public</h6>
+                                                               <p class="mb-0">Anyone on or off Facebook</p>
+                                                            </div>
                                                          </div>
-                                                      </div>
-                                                   </a>
-                                                   <a class="dropdown-item p-3" href="#">
-                                                      <div class="d-flex align-items-top">
-                                                      <i class="ri-close-circle-line h4"></i>
-                                                         <div class="data ms-2">
-                                                            <h6>Friends</h6>
-                                                            <p class="mb-0">Your Friend on facebook</p>
+                                                      </a>
+                                                      <a class="dropdown-item p-3" href="#">
+                                                         <div class="d-flex align-items-top">
+                                                         <i class="ri-close-circle-line h4"></i>
+                                                            <div class="data ms-2">
+                                                               <h6>Friends</h6>
+                                                               <p class="mb-0">Your Friend on facebook</p>
+                                                            </div>
                                                          </div>
-                                                      </div>
-                                                   </a>
-                                                   <a class="dropdown-item p-3" href="#">
-                                                      <div class="d-flex align-items-top">
-                                                         <i class="ri-user-unfollow-line h4"></i>
-                                                         <div class="data ms-2">
-                                                            <h6>Friends except</h6>
-                                                            <p class="mb-0">Don't show to some friends</p>
+                                                      </a>
+                                                      <a class="dropdown-item p-3" href="#">
+                                                         <div class="d-flex align-items-top">
+                                                            <i class="ri-user-unfollow-line h4"></i>
+                                                            <div class="data ms-2">
+                                                               <h6>Friends except</h6>
+                                                               <p class="mb-0">Don't show to some friends</p>
+                                                            </div>
                                                          </div>
-                                                      </div>
-                                                   </a>
-                                                   <a class="dropdown-item p-3" href="#">
-                                                      <div class="d-flex align-items-top">
-                                                         <i class="ri-notification-line h4"></i>
-                                                         <div class="data ms-2">
-                                                            <h6>Only Me</h6>
-                                                            <p class="mb-0">Only me</p>
+                                                      </a>
+                                                      <a class="dropdown-item p-3" href="#">
+                                                         <div class="d-flex align-items-top">
+                                                            <i class="ri-notification-line h4"></i>
+                                                            <div class="data ms-2">
+                                                               <h6>Only Me</h6>
+                                                               <p class="mb-0">Only me</p>
+                                                            </div>
                                                          </div>
-                                                      </div>
-                                                   </a>
+                                                      </a>
+                                                   </div>
                                                 </div>
                                              </div>
                                           </div>
-                                       </div>
+                                       </div> -->
+                                       <button type="submit" class="btn btn-primary d-block w-100 mt-3">Poster</button>
                                     </div>
-                                    <button type="submit" class="btn btn-primary d-block w-100 mt-3">Post</button>
-                                 </div>
+                                 </form>
                               </div>
                            </div>
                         </div>
@@ -257,47 +263,8 @@
                   <!-- end post -->
                </div>
                <div class="col-lg-4">
-                  <div class="card">
-                     <div class="card-header d-flex justify-content-between">
-                        <div class="header-title">
-                           <h4 class="card-title">Stories</h4>
-                        </div>
-                     </div>
-                     <div class="card-body">
-                        <ul class="media-story list-inline m-0 p-0">
-                           <li class="d-flex mb-3 align-items-center">
-                              <i class="ri-add-line"></i>
-                              <div class="stories-data ms-3">
-                                 <h5>Creat Your Story</h5>
-                                 <p class="mb-0">time to story</p>
-                              </div>
-                           </li>
-                           <li class="d-flex mb-3 align-items-center active">
-                              <img src="assets/images/page-img/s2.jpg" alt="story-img" class="rounded-circle img-fluid">
-                              <div class="stories-data ms-3">
-                                 <h5>Anna Mull</h5>
-                                 <p class="mb-0">1 hour ago</p>
-                              </div>
-                           </li>
-                           <li class="d-flex mb-3 align-items-center">
-                              <img src="assets/images/page-img/s3.jpg" alt="story-img" class="rounded-circle img-fluid">
-                              <div class="stories-data ms-3">
-                                 <h5>Ira Membrit</h5>
-                                 <p class="mb-0">4 hour ago</p>
-                              </div>
-                           </li>
-                           <li class="d-flex align-items-center">
-                              <img src="assets/images/page-img/s1.jpg" alt="story-img" class="rounded-circle img-fluid">
-                              <div class="stories-data ms-3">
-                                 <h5>Bob Frapples</h5>
-                                 <p class="mb-0">9 hour ago</p>
-                              </div>
-                           </li>
-                        </ul>
-                        <a href="#" class="btn btn-primary d-block mt-3">See All</a>
-                     </div>
-                  </div>
-                  <div class="card">
+                  <?php include('inc/status.php');?>
+                  <!-- <div class="card">
                      <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
                            <h4 class="card-title">Events</h4>
@@ -407,7 +374,7 @@
                            </li>
                         </ul>
                      </div>
-                  </div>
+                  </div> -->
                </div>
                <div class="col-sm-12 text-center">
                   <img src="assets/images/page-img/page-load-loader.gif" alt="loader" style="height: 100px;">
