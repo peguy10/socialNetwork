@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['bio'] = $user['bio'];
                 $_SESSION['tel'] = $user['tel'];
                 $_SESSION['email'] = $user['email'];
+                $_SESSION['role'] = $user['role'];
                 header("Location: ../index.php"); // Rediriger vers le tableau de bord
                 exit;
             } else {

@@ -15,18 +15,18 @@
                 </div>
             </div>
             <div class="card-body p-0 ">
-                <a href="app/profile.html" class="iq-sub-card iq-bg-primary-hover">
+                <a href="profil.php" class="iq-sub-card iq-bg-primary-hover">
                     <div class="d-flex align-items-center">
                         <div class="rounded card-icon bg-soft-primary">
                             <i class="ri-file-user-line"></i>
                         </div>
                         <div class="ms-3">
-                            <h6 class="mb-0 ">My Profile</h6>
-                            <p class="mb-0 font-size-12">View personal profile details.</p>
+                            <h6 class="mb-0 ">Mon Profil</h6>
+                            <p class="mb-0 font-size-12">Voir mes details personnels.</p>
                         </div>
                     </div>
                 </a>
-                <a href="app/profile-edit.html" class="iq-sub-card iq-bg-warning-hover">
+                <!-- <a href="app/profile-edit.html" class="iq-sub-card iq-bg-warning-hover">
                     <div class="d-flex align-items-center">
                         <div class="rounded card-icon bg-soft-warning">
                             <i class="ri-profile-line"></i>
@@ -36,8 +36,8 @@
                             <p class="mb-0 font-size-12">Modify your personal details.</p>
                         </div>
                     </div>
-                </a>
-                <a href="app/account-setting.html" class="iq-sub-card iq-bg-info-hover">
+                </a> -->
+                <!-- <a href="app/account-setting.html" class="iq-sub-card iq-bg-info-hover">
                     <div class="d-flex align-items-center">
                         <div class="rounded card-icon bg-soft-info">
                             <i class="ri-account-box-line"></i>
@@ -59,7 +59,7 @@
                             </p>
                         </div>
                     </div>
-                </a>
+                </a> -->
                 <div class="d-inline-block w-100 text-center p-3">
                     <a class="btn btn-primary iq-sign-btn" href="logout.php" role="button">Sign
                         out<i class="ri-login-box-line ms-2"></i></a>

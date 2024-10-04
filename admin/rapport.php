@@ -71,10 +71,10 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Publications</h1>
+					<h1>Rapport</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="#">Publications</a>
+							<a href="#">Rapport</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
@@ -82,49 +82,32 @@
 						</li>
 					</ul>
 				</div>
-				<a href="../creer_contenu.php" class="btn-download">
+				<!-- <a href="../creer_contenu.php" class="btn-download">
                 <i class='bx bx-plus' ></i>
 					<span class="text">Ajouter un contenu </span>
-				</a>
+				</a> -->
 			</div>
 
 
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Mes publications</h3>
+						<h3>Nombre de Contenu par utilisateur</h3>
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
 					<table>
 						<thead>
 							<tr>
-								<th>Publications</th>
-								<th>Date</th>
-								<th><i class='bx bxs-message-rounded-dots comment'></i></th>
-								<th><i class='bx bxs-like like' ></i></th>
-								<th>Status</th>
+								<th>Nom utilisateur</th>
+								<th>nombre de contenu</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($derniers_contenus as $content) {?>
+							<?php foreach ($rapport_utilisateurs as $utilisateur) {?>
 									<tr>
-											<td>
-													<img src="<?php echo $content['image'];?>">
-												<a href="../">
-													<p><?php echo substr($content['description'], 0, 50);?>... </p>
-												</a>
-											</td>
-											<td><?php echo $content['date_creation'];?></td>
-											<td><?php echo $content['nom_utilisateur'];?></td>
-											<td><?php echo $content['nombre_commentaires'];?></td>
-											<td><?php echo $content['nombre_likes'];?></td>
-											<td>
-											<form method="post" action="">
-												<input type="hidden" name="contenu_id" value="<?php echo htmlspecialchars($contenu['id']); ?>">
-												<button type="submit" name="supprimer" class="button"><i class='bx bx-trash' ></i></button>
-											</form>
-											</td>
+											<td><img src="<?php echo $utilisateur['photo'];?>"><?php echo htmlspecialchars($utilisateur['nom']); ?></td>
+											<td><?php echo htmlspecialchars($utilisateur['nombre_contenus']); ?></td>
 									</tr>
 							<?php }?>
 							

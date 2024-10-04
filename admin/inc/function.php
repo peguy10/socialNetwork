@@ -2,7 +2,7 @@
    session_start();
    include('../inc/db_connect.php');
    if (!isset($_SESSION['user_name'])) {
-      header('location: signin.php');
+      header('location: ../signin.php');
    }
 
    // Fonction pour récupérer les statistiques
@@ -36,7 +36,7 @@ function recupererDerniersContenus($pdo) {
         FROM contenus c
         JOIN createurs u ON c.utilisateur_id = u.id_user
         ORDER BY c.date_creation DESC 
-        LIMIT 3
+      
     ";
     $stmt = $pdo->query($sql);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -53,10 +53,12 @@ function recupererMesContenus($pdo, $iduser) {
                (SELECT COUNT(*) FROM commentaires WHERE contenu_id = c.id) AS nombre_commentaires,
                (SELECT COUNT(*) FROM likes WHERE contenu_id = c.id) AS nombre_likes
         FROM contenus c
+        WHERE c.utilisateur_id = :iduser
         ORDER BY c.date_creation DESC 
     ";
     
     $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':iduser', $iduser, PDO::PARAM_INT);
     $stmt->execute();
     
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -64,4 +66,20 @@ function recupererMesContenus($pdo, $iduser) {
 
 // Récupérer mes contenus
 $contents = recupererMesContenus($pdo, $iduser);
+
+
+function recupererRapportUtilisateurs($pdo) {
+    $sql = "
+        SELECT u.id_user,u.photo,u.nom, COUNT(c.id) AS nombre_contenus
+        FROM createurs u
+        LEFT JOIN contenus c ON u.id_user = c.utilisateur_id
+        GROUP BY u.id_user, u.nom
+        ORDER BY nombre_contenus DESC
+    ";
+    $stmt = $pdo->query($sql);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+// Récupérer le rapport des utilisateurs
+$rapport_utilisateurs = recupererRapportUtilisateurs($pdo);
+
 ?>

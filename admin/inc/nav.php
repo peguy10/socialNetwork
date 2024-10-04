@@ -11,17 +11,31 @@
 				</a>
 			</li>
 			<li>
-				<a href="./publication.php">
+				<a href="./mespublications.php">
 					<i class='bx bxs-shopping-bag-alt' ></i>
 					<span class="text">Mes Publications</span>
 				</a>
 			</li>
-			<li>
+			<?php if ($_SESSION['role'] == 'admin') {?>
+				<li>
+					<a href="./publication.php">
+						<i class='bx bxs-shopping-bag-alt' ></i>
+						<span class="text">statistique Publications</span>
+					</a>
+				</li>
+				<li>
+					<a href="rapport.php">
+						<i class='bx bxs-group' ></i>
+						<span class="text">Rapport</span>
+					</a>
+				</li>
+			<?php }	?>
+			<!-- <li>
 				<a href="#">
 					<i class='bx bxs-group' ></i>
 					<span class="text">utilisateurs</span>
 				</a>
-			</li>
+			</li> -->
 			<!-- <li>
 				<a href="#">
 					<i class='bx bxs-message-dots' ></i>
@@ -36,12 +50,12 @@
 			</li> -->
 		</ul>
 		<ul class="side-menu">
-			<li>
+			<!-- <li>
 				<a href="#">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
 				</a>
-			</li>
+			</li> -->
 			<li>
 				<a href="../logout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>

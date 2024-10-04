@@ -1,5 +1,8 @@
 <?php 
 	require 'inc/function.php';
+	if ($_SESSION['role'] != 'admin') {
+		header('location: mespublications.php');
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,7 +119,7 @@
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Recent Orders</h3>
+						<h3>publication recentes</h3>
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>

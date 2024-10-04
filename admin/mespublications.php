@@ -107,24 +107,24 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($derniers_contenus as $content) {?>
+							<?php foreach ($contents as $content) {?>
 									<tr>
 											<td>
 													<img src="<?php echo $content['image'];?>">
 												<a href="../">
-													<p><?php echo substr($content['description'], 0, 50);?>... </p>
+													<p><?php echo substr($content['description'], 0, 100);?>... </p>
 												</a>
 											</td>
 											<td><?php echo $content['date_creation'];?></td>
-											<td><?php echo $content['nom_utilisateur'];?></td>
 											<td><?php echo $content['nombre_commentaires'];?></td>
 											<td><?php echo $content['nombre_likes'];?></td>
 											<td>
-											<form method="post" action="">
-												<input type="hidden" name="contenu_id" value="<?php echo htmlspecialchars($contenu['id']); ?>">
-												<button type="submit" name="supprimer" class="button"><i class='bx bx-trash' ></i></button>
-											</form>
-											</td>
+                                                
+                                                <form method="post" action="">
+                                                    <input type="hidden" name="contenu_id" value="<?php echo htmlspecialchars($contenu['id']); ?>">
+                                                    <button type="submit" name="supprimer" class="button"><i class='bx bx-trash' ></i></button>
+                                                </form>
+                                            </td>
 									</tr>
 							<?php }?>
 							

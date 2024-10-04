@@ -136,7 +136,7 @@
                                 <?php echo $contenu['nombre_likes']; ?> Likes
                                 <i class="fa fa-heart-rate" aria-hidden="true"></i>
                                 </span>
-                                <div class="dropdown-menu">
+                                <!-- <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Max Emum</a>
                                     <a class="dropdown-item" href="#">Bill Yerds</a>
                                     <a class="dropdown-item" href="#">Hap E. Birthday</a>
@@ -144,7 +144,7 @@
                                     <a class="dropdown-item" href="#">Midge Itz</a>
                                     <a class="dropdown-item" href="#">Sal Vidge</a>
                                     <a class="dropdown-item" href="#">Other</a>
-                                </div>
+                                </div> -->
                                 </div>
                             </div>
                         </div>
@@ -153,7 +153,7 @@
                                 <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
                                 <?php echo $contenu['nombre_commentaires']; ?> Commentaires
                                 </span>
-                                <div class="dropdown-menu">
+                                <!-- <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Max Emum</a>
                                 <a class="dropdown-item" href="#">Bill Yerds</a>
                                 <a class="dropdown-item" href="#">Hap E. Birthday</a>
@@ -161,7 +161,7 @@
                                 <a class="dropdown-item" href="#">Midge Itz</a>
                                 <a class="dropdown-item" href="#">Sal Vidge</a>
                                 <a class="dropdown-item" href="#">Other</a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
